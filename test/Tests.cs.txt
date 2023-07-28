@@ -1,0 +1,24 @@
+using Xunit;
+using Microsoft.AspNetCore.Identity;
+
+namespace CLI_PasswordHasher.Tests
+{
+    public class Tests
+    {
+        private readonly PasswordHasher<object> _hasher = new PasswordHasher<object>();
+
+        [Theory]
+        [InlineData("hi", "AQAAAAEAACcQAAAAEJR3fvNllNdONXc2EKkLnB3oIQvGXVISeu+Bz3ng8XOeGroNKXmgn3sDHt/s//Hoag==")]
+        [InlineData("hello", "AQAAAAEAACcQAAAAEKiv0T9vTMrPweYZgdVnTHjvMs5Ud1yXsH+WNXS++HqwrUKrISOgS1DHct0D4irr4Q==")]
+        [InlineData("Password123", "AQAAAAEAACcQAAAAEKnmf3ANd9NRuio6XM0APsaOvRfh/GC6xj3LPHeX7meBfFXwZ9bmfSjbZUSDxVWekQ==")]
+        [InlineData("alongertestpassword", "AQAAAAEAACcQAAAAEBJOcxUBL47kXxH/YdFD5j1zfkxu3U9sYFpTVPITLxq8LdfcLT4NlGtpJnLRPL8m7A==")]
+        public void TestPasswordHashing(string value, string expectedOutput)
+        {
+            // act
+            var result = _hasher.HashPassword(null, value);
+
+            // assert
+            Assert.Equal(expectedOutput, result);
+        }
+    }
+}
