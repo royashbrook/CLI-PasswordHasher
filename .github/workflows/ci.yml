@@ -1,11 +1,11 @@
-# Run xUnit tests on every push to main and every PR.
+# Build + test on every push to master and every PR.
 # Keeps the door open for "next submitter has something to pass".
 
 name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
 
 jobs:
@@ -16,5 +16,7 @@ jobs:
       - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.0.x'
+      - name: dotnet build (root project — catches greedy-glob regressions)
+        run: dotnet build h.csproj -c Release
       - name: dotnet test
         run: dotnet test test/h.Tests --logger "console;verbosity=normal"

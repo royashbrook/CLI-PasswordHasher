@@ -4,6 +4,10 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <!-- The test/h.Tests project lives under test/; without this exclude, -->
+    <!-- this Exe project's default source-globbing would pull the xUnit  -->
+    <!-- test files into its own compilation and fail (no xunit ref).     -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);test/**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
