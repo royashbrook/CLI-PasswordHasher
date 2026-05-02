@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
+    <PackageReference Include="xunit" Version="2.*" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.*" />
+  </ItemGroup>
+
+  <!-- Compile the vendored PasswordHasher sources directly into the test  -->
+  <!-- assembly. Avoids the awkwardness of taking a ProjectReference on an -->
+  <!-- Exe project, and means the tests exercise the exact same code.      -->
+  <ItemGroup>
+    <Compile Include="..\..\PasswordHasher.cs" />
+    <Compile Include="..\..\PasswordHasherOptions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="10.*" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.*" />
+  </ItemGroup>
+
+</Project>

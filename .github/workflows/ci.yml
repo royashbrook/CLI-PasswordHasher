@@ -1,0 +1,20 @@
+# Run xUnit tests on every push to main and every PR.
+# Keeps the door open for "next submitter has something to pass".
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - name: dotnet test
+        run: dotnet test test/h.Tests --logger "console;verbosity=normal"
